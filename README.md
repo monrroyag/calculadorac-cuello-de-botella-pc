@@ -1,7 +1,8 @@
 
 # Calculadora de Cuello de Botella - PC
 
-![Calculadora de Cuello de Botella](https://github.com/monrroyag/calculadorac-cuello-de-botella-pc/blob/main/imagenes/image.png)
+![Calculadora de Cuello de Botella](img/image1.png)
+![Detalles de la calculadora](img/image2.png)
 
 ## Descripción
 
