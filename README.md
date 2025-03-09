@@ -1,5 +1,5 @@
 
-# Calculadora de Cuello de Botella - PC
+# Calculadora de Cuello de Botella Python - PC
 
 ![Calculadora de Cuello de Botella](img/image1.png)
 ![Detalles de la calculadora](img/image2.png)
