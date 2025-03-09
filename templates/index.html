@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selección de GPU y CPU</title>
+
+    <!-- Incluir CSS de Select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Vinculando el CSS externo -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Selecciona tu GPU y CPU</h1>
+
+        <!-- Formulario para seleccionar GPU y CPU -->
+        <form method="POST">
+            <div class="form-group">
+                <label for="gpu_name">Selecciona la GPU:</label>
+                <select id="gpu_name" name="gpu_name">
+                    {% for gpu in gpu_data %}
+                        <option value="{{ gpu['name'] }}">{{ gpu['name'] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="cpu_name">Selecciona la CPU:</label>
+                <select id="cpu_name" name="cpu_name">
+                    {% for cpu in cpu_data %}
+                        <option value="{{ cpu['name'] }}">{{ cpu['name'] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit">Seleccionar</button>
+        </form>
+
+        {% if gpu_details and cpu_details %}
+        <h2>Detalles seleccionados</h2>
+        <div class="details">
+            <p><strong>Has seleccionado la GPU:</strong> {{ gpu_details['name'] }} y la CPU: {{ cpu_details['name'] }}</p>
+            <h3>Detalles de la GPU:</h3>
+            <ul>
+                <li><strong>Nombre GPU:</strong> {{ gpu_details['name'] }}</li>
+                <li><strong>Frecuencia base:</strong> {{ gpu_details['base_clock'] }}</li>
+                <li><strong>Cores:</strong> {{ gpu_details['cores'] }}</li>
+            </ul>
+
+            <h3>Detalles de la CPU:</h3>
+            <ul>
+                <li><strong>Nombre CPU:</strong> {{ cpu_details['name'] }}</li>
+                <li><strong>Frecuencia base:</strong> {{ cpu_details['base_clock'] }}</li>
+                <li><strong>Cores:</strong> {{ cpu_details['cores'] }}</li>
+                <li><strong>TDP:</strong> {{ cpu_details['tdp'] }}</li>
+            </ul>
+
+            <h3>Resultado del cálculo de cuello de botella:</h3>
+            <p>{{ bottleneck_message }}</p>
+        </div>
+        {% endif %}
+
+        <a href="/download_data">Descargar Datos en JSON</a>
+    </div>
+
+    <!-- Incluir JS de Select2 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // Activar Select2 en las listas desplegables de GPU y CPU
+            $('#gpu_name').select2({
+                placeholder: "Selecciona una GPU",
+                allowClear: true,
+                width: '100%'
+            });
+
+            $('#cpu_name').select2({
+                placeholder: "Selecciona una CPU",
+                allowClear: true,
+                width: '100%'
+            });
+        });
+    </script>
+
+<footer style="text-align:center; padding: 20px; font-size: 14px; color: #666;">
+    <p>© 2025 Agustín Arellano - <a href="https://github.com/monrroyag">GitHub: monrroyag</a></p>
+</footer>
+</body>
+</html>
